@@ -1,0 +1,112 @@
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 50%, var(--border-bright) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    var(--glow-shadow);
+}
+
+.project-card:hover::after {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  opacity: 1;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.project-icon-box {
+  font-size: 1.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.project-card:hover .project-icon-box {
+  background: linear-gradient(135deg, var(--accent-glow), var(--accent-2-glow));
+  border-color: var(--accent-2);
+}
+
+.project-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.project-desc {
+  margin: 0 0 24px;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-tag-badge {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  background-color: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+
+.project-card:hover .project-tag-badge {
+  color: var(--text);
+  background-color: var(--accent-glow);
+  border-color: var(--accent);
+}
+
