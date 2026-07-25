@@ -1,13 +1,56 @@
-# React + Vite
+# \## Practical 3: API Integration and Data Rendering in React
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# 
 
-Currently, two official plugins are available:
+# \### API Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# \- \*\*GitHub REST API\*\* — `https://api.github.com/users/<username>/repos`
 
-## React Compiler
+# \- No authentication required (public endpoint), so no API key setup is needed.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 
+
+# \### Features Implemented
+
+# \- Fetches repository data from the GitHub API on component mount using `useEffect`
+
+# \- Displays a loading spinner (`Spinner` component) while the request is in progress
+
+# \- Displays an error message (`ErrorMessage` component) if the API call fails
+
+# \- Renders each repository's name and URL once data loads successfully
+
+# 
+
+# \### Setup Steps
+
+# 1\. Clone the repository:
+
+# ```bash
+
+# &#x20;  git clone https://github.com/Jahnvi007/portfolio-D25IT122.git
+
+# &#x20;  cd portfolio-D25IT122
+
+# ```
+
+# 2\. Install dependencies:
+
+# ```bash
+
+# &#x20;  npm install
+
+# ```
+
+# 3\. Run the development server:
+
+# ```bash
+
+# &#x20;  npm run dev
+
+# ```
+
+# 4\. Open the app in your browser (Vite will show the local URL, typically `http://localhost:5173`)
+
+# 5\. Navigate to the \*\*Projects\*\* page to see the GitHub repositories load dynamically.
 
