@@ -11,7 +11,7 @@
 .skills-title {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
   margin-bottom: 8px;
 }
 

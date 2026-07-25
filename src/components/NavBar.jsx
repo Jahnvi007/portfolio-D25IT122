@@ -1,30 +1,23 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
-const SECTIONS = ["about", "skills", "projects", "footer"];
-const LABELS = { about: "about", skills: "skills", projects: "projects", footer: "contact" };
+const ROUTES = [
+  { path: "/", label: "home" },
+  { path: "/projects", label: "projects" },
+  { path: "/contact", label: "contact" },
+];
 
 function NavBar() {
-  const [activeSection, setActiveSection] = useState("about");
+  // useState #1: toggles UI visibility/appearance — dark vs light theme
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      let current = activeSection;
-      for (const id of SECTIONS) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            current = id;
-          }
-        }
-      }
-      setActiveSection(current);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSection]);
+    document.documentElement.setAttribute(
+      "data-theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
 
   return (
     <nav className="navbar">
@@ -34,16 +27,27 @@ function NavBar() {
           <span className="navbar-cursor">_</span>
         </span>
         <ul>
-          {SECTIONS.map((id) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                className={activeSection === id ? "active" : ""}
+          {ROUTES.map((route) => (
+            <li key={route.path}>
+              <NavLink
+                to={route.path}
+                end={route.path === "/"}
+                className={({ isActive }) => (isActive ? "active" : "")}
               >
-                /{LABELS[id]}
-              </a>
+                /{route.label}
+              </NavLink>
             </li>
           ))}
+          <li>
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={() => setDarkMode((prev) => !prev)}
+              aria-label="Toggle dark and light mode"
+            >
+              {darkMode ? "🌙" : "☀️"}
+            </button>
+          </li>
         </ul>
       </div>
     </nav>

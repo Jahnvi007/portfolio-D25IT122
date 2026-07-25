@@ -1,0 +1,43 @@
+.error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 36px 24px;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background-color: rgba(239, 68, 68, 0.06);
+  border-radius: 14px;
+}
+
+.error-title {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+
+.error-detail {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  max-width: 480px;
+}
+
+.retry-btn {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--tint);
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.retry-btn:hover {
+  background: linear-gradient(135deg, var(--accent-glow), var(--accent-2-glow));
+  border-color: var(--accent);
+}

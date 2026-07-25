@@ -25,7 +25,7 @@ function About() {
             <p>2 Industry Internships in Python & Machine Learning</p>
           </div>
           <div className="about-grid-card">
-            <div className="about-grid-icon"></div>
+            
             <h4>Location</h4>
             <p>CHARUSAT, Gujarat, India</p>
           </div>
@@ -34,6 +34,5 @@ function About() {
     </section>
   );
 }
-
 export default About;
 

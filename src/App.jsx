@@ -1,21 +1,22 @@
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Header from "./components/Header";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 import "./App.css";
-
-const mySkills = ["Python", "DBMS", "DSA", "Node.js"];
 
 function App() {
   return (
     <>
       <NavBar />
-      <Header name="Janvi" themeColor="#3e4c59" />
-      <About />
-      <Skills skillList={mySkills} />
-      <Projects />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
     </>
   );
