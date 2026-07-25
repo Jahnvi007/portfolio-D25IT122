@@ -54,7 +54,7 @@
 
 .project-icon-box {
   font-size: 1.4rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--tint);
   border: 1px solid var(--border);
   border-radius: 8px;
   width: 40px;
@@ -74,7 +74,7 @@
   margin: 0;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .project-desc {
@@ -110,3 +110,86 @@
   border-color: var(--accent);
 }
 
+/* --- GitHub Repositories (Practical 3: API integration) --- */
+
+.repo-search {
+  width: 100%;
+  max-width: 360px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text);
+  background-color: var(--tint);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 24px;
+  transition: var(--transition);
+}
+
+.repo-search:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: var(--tint-strong);
+}
+
+.repo-search::placeholder {
+  color: var(--text-faint);
+}
+
+.repo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.repo-card {
+  display: block;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.repo-card:hover {
+  border-color: var(--accent-2);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.repo-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.repo-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.repo-stars {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+
+.repo-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.repo-empty {
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}

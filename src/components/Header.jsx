@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 function Header({ name }) {
@@ -21,8 +22,8 @@ function Header({ name }) {
           </h1>
           <p className="hero-tagline">B.Tech Student in Information Technology</p>
           <div className="hero-actions">
-            <a href="#projects" className="btn-primary">View Projects</a>
-            <a href="#footer" className="btn-secondary">Let's Connect</a>
+            <Link to="/projects" className="btn-primary">View Projects</Link>
+            <Link to="/contact" className="btn-secondary">Let's Connect</Link>
           </div>
         </div>
       </div>
