@@ -5,6 +5,7 @@ import "./NavBar.css";
 const ROUTES = [
   { path: "/", label: "home" },
   { path: "/projects", label: "projects" },
+  { path: "/tasks", label: "tasks" },
   { path: "/contact", label: "contact" },
 ];
 
