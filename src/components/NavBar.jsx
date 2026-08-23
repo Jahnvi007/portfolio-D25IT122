@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { isLoggedIn, logout } from "../api/auth";
 import "./NavBar.css";
 
 const ROUTES = [
@@ -12,6 +13,9 @@ const ROUTES = [
 function NavBar() {
   // useState #1: toggles UI visibility/appearance — dark vs light theme
   const [darkMode, setDarkMode] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -19,6 +23,18 @@ function NavBar() {
       darkMode ? "dark" : "light"
     );
   }, [darkMode]);
+
+  // Re-check the stored token whenever the route changes (e.g. right
+  // after Login.jsx navigates to /tasks) so the nav reflects it immediately.
+  useEffect(() => {
+    setLoggedIn(isLoggedIn());
+  }, [location]);
+
+  const handleLogout = () => {
+    logout();
+    setLoggedIn(false);
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
@@ -39,6 +55,17 @@ function NavBar() {
               </NavLink>
             </li>
           ))}
+          <li>
+            {loggedIn ? (
+              <button type="button" className="theme-toggle" onClick={handleLogout}>
+                logout
+              </button>
+            ) : (
+              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
+                /login
+              </NavLink>
+            )}
+          </li>
           <li>
             <button
               type="button"

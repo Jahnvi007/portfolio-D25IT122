@@ -1,10 +1,17 @@
+import { getToken, logout } from "./auth";
+
 const BASE_URL = "http://localhost:5000";
 
 async function request(path, options = {}) {
+  const token = getToken();
+
   let res;
   try {
     res = await fetch(`${BASE_URL}${path}`, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
       ...options,
     });
   } catch {
@@ -20,6 +27,13 @@ async function request(path, options = {}) {
     data = await res.json();
   } catch {
     // some error responses may not carry a JSON body
+  }
+
+  if (res.status === 401) {
+    // Token missing/expired/invalid — clear it and send the user back to login.
+    logout();
+    window.location.href = "/login";
+    throw new Error(data?.message || data?.error || "Session expired. Please log in again.");
   }
 
   if (!res.ok) {
