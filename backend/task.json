@@ -1,0 +1,6 @@
+{
+  "title": "Cache Test Task",
+  "description": "Testing cache invalidation",
+  "completed": false,
+  "priority": "medium"
+}
