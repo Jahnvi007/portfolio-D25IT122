@@ -35,3 +35,7 @@ lerna-debug.log*
 
 # OS files
 Thumbs.db
+# Environment files and local backups
+.env.*
+!.env.example
+*.env.backup

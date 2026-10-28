@@ -1,11 +1,12 @@
+
 const Task = require('../models/Task');
-const cache = require("../cache/cache");
+const cache = require('../cache/cache');
+const taskEvents = require('../events');
 
 // GET /tasks
 async function getAllTasks(req, res, next) {
   try {
     const cacheKey = 'all_tasks';
-
     const cachedTasks = cache.get(cacheKey);
 
     if (cachedTasks) {
@@ -16,7 +17,6 @@ async function getAllTasks(req, res, next) {
     console.log('Cache MISS: all_tasks');
 
     const tasks = await Task.find();
-
     cache.set(cacheKey, tasks);
 
     res.status(200).json(tasks);
@@ -55,7 +55,22 @@ async function createTask(req, res, next) {
     // Invalidate cached task list after creating a task
     cache.del('all_tasks');
 
+    // Send the API response before the delayed notification completes
     res.status(201).json(newTask);
+
+    // Emit the task-created event after sending the response
+    try {
+      taskEvents.emit('task-created', {
+        title: newTask.title,
+        createdBy:
+          req.user?.email ||
+          req.user?.id ||
+          'Authenticated user',
+        createdAt: new Date()
+      });
+    } catch (eventError) {
+      taskEvents.emit('error', eventError);
+    }
   } catch (err) {
     next(err);
   }
@@ -101,7 +116,14 @@ async function deleteTask(req, res, next) {
     // Invalidate cached task list after deleting a task
     cache.del('all_tasks');
 
+    // Send the successful response
     res.status(204).send();
+
+    // Notify listeners that a task was deleted
+    taskEvents.emit('task-deleted', {
+      title: deleted.title,
+      deletedAt: new Date()
+    });
   } catch (err) {
     next(err);
   }
