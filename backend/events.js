@@ -4,6 +4,11 @@ const taskEvents = new EventEmitter();
 
 // Listener for task creation
 taskEvents.on('task-created', (task) => {
+  console.log(
+    '[EVENT HANDLER] Started at:',
+    new Date().toISOString()
+  );
+
   const eventTime = new Date().toLocaleString();
 
   const createdBy =

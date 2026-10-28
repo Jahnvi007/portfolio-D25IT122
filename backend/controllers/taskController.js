@@ -55,8 +55,15 @@ async function createTask(req, res, next) {
     // Invalidate cached task list after creating a task
     cache.del('all_tasks');
 
-    // Send the API response before the delayed notification completes
-    res.status(201).json(newTask);
+  // Record the API response timestamp
+console.log(
+  '[API] Response sent at:',
+  new Date().toISOString()
+);
+
+// Send the API response before the delayed notification completes
+res.status(201).json(newTask);
+
 
     // Emit the task-created event after sending the response
     try {
