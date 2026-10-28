@@ -110,3 +110,80 @@ task-manager-api/
 The Richardson Maturity Model evaluation for this API lives in the
 separate `assignment-w4-<rollno>` repository (see `MATURITY.md` there),
 per the Week 4 assignment brief.
+
+
+## Docker Setup
+
+The application can be run using Docker and Docker Compose. The setup includes the frontend, backend API, and MongoDB database.
+
+### Prerequisites
+
+- Docker Desktop installed and running.
+- A valid JWT secret for backend authentication.
+
+### Running the Application
+
+Open PowerShell in the project directory:
+
+```powershell
+cd D:\AWDF\Practical10-portfolio
+```
+
+Set the JWT secret for the current PowerShell session:
+
+```powershell
+$env:JWT_SECRET = "your-private-jwt-secret"
+```
+
+Build the images and start the services:
+
+```powershell
+docker compose up --build -d
+```
+
+Check the running containers:
+
+```powershell
+docker compose ps
+```
+
+### Accessing the Application
+
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:5000
+
+The frontend communicates with the backend API, while the backend connects to MongoDB through the Docker Compose network.
+
+### Database Persistence
+
+MongoDB uses a named Docker volume called `portfolio-data` to retain database files when containers are restarted or recreated.
+
+To stop the application:
+
+```powershell
+docker compose down
+```
+
+To start it again:
+
+```powershell
+docker compose up -d
+```
+
+The named volume is retained when using `docker compose down`, so the database data remains available.
+
+**Note:** Avoid `docker compose down -v` if you want to preserve the database, because it removes the Compose-managed volume.
+
+### Viewing Logs
+
+To view logs for all services:
+
+powershell
+docker compose logs
+
+
+To view logs for a specific service:
+
+docker compose logs backend
+docker compose logs frontend
+docker compose logs mongodb

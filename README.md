@@ -44,3 +44,74 @@
   Projects, Tasks, NotFound) totaling ~14 kB, loaded on demand.
 
   Screenshots: `docs/practical8-before.png`, `docs/practical8-after.png`, `docs/practical8-fallback.png`
+## Docker Setup
+
+The application can be run using Docker and Docker Compose. The setup includes the React frontend, Node.js backend API, and MongoDB database.
+
+### Prerequisites
+
+- Docker Desktop installed and running.
+- A JWT secret for backend authentication.
+
+### Start the Application
+
+From the project root directory, set the JWT secret in PowerShell:
+
+```powershell
+$env:JWT_SECRET = "your-private-jwt-secret"
+```
+
+Build the images and start all services:
+
+```powershell
+docker compose up --build -d
+```
+
+Check the status of the containers:
+
+```powershell
+docker compose ps
+```
+
+### Access the Application
+
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:5000
+
+The frontend communicates with the backend API, while the backend connects to MongoDB through the Docker Compose network.
+
+### Database Persistence
+
+MongoDB uses a named Docker volume, `portfolio-data`, to retain database files when containers are restarted or recreated.
+
+Stop the application:
+
+```powershell
+docker compose down
+```
+
+Start it again:
+
+```powershell
+docker compose up -d
+```
+
+The named volume is retained when using `docker compose down`, so database data remains available.
+
+**Note:** Avoid `docker compose down -v` if you need to preserve the database, because this removes the Compose-managed volume.
+
+### View Logs
+
+View logs for all services:
+
+```powershell
+docker compose logs
+```
+
+View logs for an individual service:
+
+```powershell
+docker compose logs frontend
+docker compose logs backend
+docker compose logs mongodb
+```
