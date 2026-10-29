@@ -10,6 +10,7 @@ const errorHandler = require('./middleware/errorHandler');
 const authenticate = require('./middleware/auth');
 const taskRoutes = require('./routes/taskRoutes');
 const authRoutes = require('./routes/authRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 
 // Import the same cache instance used by taskController
 const cache = require('./cache/cache');
@@ -23,9 +24,11 @@ app.use(express.json());
 app.use(requestLogger);
 app.use(requireJson);
 
+
 // --- Routes ---
 app.use('/auth', authRoutes);
 app.use('/tasks', authenticate, taskRoutes);
+app.use('/api/ai', aiRoutes);
 
 // --- 404 handler ---
 app.use(notFound);

@@ -196,3 +196,33 @@
     grid-template-columns: 1fr;
   }
 }
+/* --- AI-generated task descriptions --- */
+
+.ai-description-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.ai-description-actions button {
+  font-size: 0.8rem;
+  padding: 9px 16px;
+}
+
+.ai-loading {
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  margin-top: 6px;
+}
+
+.ai-description-notice {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+.ai-description-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
