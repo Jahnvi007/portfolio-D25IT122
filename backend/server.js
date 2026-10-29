@@ -34,21 +34,20 @@ app.use(notFound);
 app.use(errorHandler);
 
 // --- MongoDB connection ---
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('MongoDB connected');
+if (require.main === module) {
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log('MongoDB connected');
+      console.log('Cache initialized:', !!cache);
 
-    // Debug: confirm cache instance is available
-    console.log('Cache initialized:', !!cache);
-
-    app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1);
-  });
+      app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error('MongoDB connection error:', err.message);
+      process.exit(1);
+    });
+}
 
 module.exports = app;
