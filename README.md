@@ -1,3 +1,5 @@
+[![Task Manager CI](https://github.com/Jahnvi007/portfolio-D25IT122/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Jahnvi007/portfolio-D25IT122/actions/workflows/ci.yml)
+
   # React + Vite
 
   This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
